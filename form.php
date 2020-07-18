@@ -46,6 +46,12 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label class="font-weight-bold">อายุ</label>
+                    <input type="text" class="form-control" id="age" name="age" value="">
+                </div>
+            </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label class="font-weight-bold">โรคประจำตัว</label>
@@ -272,7 +278,6 @@
         }
     };
 
-
     $('#retinal_date').datepicker({
         format: "yyyy-mm-dd",
         language: "th",
@@ -281,7 +286,6 @@
         todayBtn: true
     });
 
-    
     $('#ctvf_date').datepicker({
         format: "yyyy-mm-dd",
         language: "th",
@@ -305,6 +309,4 @@
         clearBtn: true,
         todayBtn: true
     });
-
-    
 </script>
