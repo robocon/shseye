@@ -5,7 +5,8 @@ include 'bootstrap.php';
 $action = input_post('action');
 if ($action === 'save') {
 	
-	dump($_POST);
+	$db = Mysql::load();
+
 	$date = date('Y-m-d H:i:s');
 	$dateFile = date('Ymd');
 	$yot = input_post('yot');
@@ -14,15 +15,13 @@ if ($action === 'save') {
 	$hn = input_post('hn');
 	$idcard = input_post('idcard');
 	$congenital = json_encode($_POST['congenital']);
-	$myopia = input_post('myopia');
-	$family = input_post('family');
+	$myopia = $_POST['myopia'];
+	$family = $_POST['family'];
 	$diag = json_encode($_POST['diag']);
 	$drugGlaucoma = json_encode($_POST['drugGlaucoma']);
 	$retinalDate = input_post('retinal_date');
 	$ctvfDate = input_post('ctvf_date');
 	$octDate = input_post('oct_date');
-
-	// dump($_FILES);
 
 	$targetDir = "uploads/$idcard/";
 	if (!file_exists($targetDir)) {
@@ -71,6 +70,8 @@ if ($action === 'save') {
 		'$idcard', '$congenital', '$myopia', '$family', '$diag', '$drugGlaucoma', 
 		'$retinalDate', '$retinalImg', '$ctvfDate', '$ctvfImg', '$octDate', '$octImg'
 	);";
+	$db->insert($sql);
+	$patientId = $db->get_last_id();
 
 	$iopDate = input_post('iop_date');
 	$left = input_post('iop_left');
@@ -81,14 +82,16 @@ if ($action === 'save') {
 	) VALUES ( 
 		NULL, '$date', '$iopDate', '$patientId', '$left', '$right' 
 	);";
+	$db->insert($sql);
 
+	redirect('index.php', 'บันทึกข้อมูลเรียบร้อย');
 	exit;
 }
 
 include 'header.php';
 $page = input('page');
 if(empty($page)){
-
+	include 'landing.php';
 }elseif ($page=='form') { 
 	include 'form.php';
 }

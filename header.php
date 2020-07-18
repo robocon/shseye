@@ -27,11 +27,22 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="index.php">หน้าหลัก</a>
 				</li>
+				<li class="nav-item active">
+					<a class="nav-link" href="index.php?page=patient">รายการ</a>
+				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="index.php?page=patient_form">ฟอร์มบันทึก</a>
+					<a class="nav-link" href="index.php?page=form">ฟอร์มบันทึก</a>
 				</li>
 			</ul>
 		</div>
 	</div>
 </nav>
 <div class="container-fluid">
+<?php 
+if (isset($_SESSION['x-msg'])) {
+	?>
+	<div class="alert alert-info" role="alert"><?=$_SESSION['x-msg'];?></div>
+	<?php
+	$_SESSION['x-msg'] = NULL;
+}
+?>

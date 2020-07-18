@@ -33,7 +33,7 @@ class Mysql
 		$dbname = DB;
 		$user = USER;
 		$pass = PASS;
-		$charset = 'TIS620';
+		$charset = 'utf8';
 
 		// Override config
 		if( $configs !== false ){
@@ -51,7 +51,7 @@ class Mysql
 			
 			// $match = preg_match('/(tis-620)/', $_SERVER['CONTENT_TYPE']);
 			// if( empty($match) ){
-			// 	$this->db->exec("SET NAMES $charset ;");
+				$this->db->exec("SET NAMES $charset ;");
 			// }
 
 		} catch (PDOException $e) {

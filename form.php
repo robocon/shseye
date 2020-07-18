@@ -5,8 +5,7 @@
 <link rel="stylesheet" href="ChartJs/Chart.min.css">
 <script src="ChartJs/Chart.bundle.min.js"></script>
 
-<div class="row"><div class="col-md"></div></div>
-
+<div class="row"><div class="col-md">&nbsp;</div></div>
 <div class="jumbotron">
     <h1>ฟอร์มต้อหิน</h1>
 </div>
@@ -18,19 +17,19 @@
             <div class="col-md-2">
                 <div class="form-group">
                     <label for="yot" class="font-weight-bold">ยศ/คำนำหน้าชื่อ</label>
-                    <input type="text" class="form-control" id="yot" name="yot" value="นาง">
+                    <input type="text" class="form-control" id="yot" name="yot" value="">
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-group">
                     <label for="name" class="font-weight-bold">ชื่อ</label>
-                    <input type="text" class="form-control" id="name" name="name" value="วาณี">
+                    <input type="text" class="form-control" id="name" name="name" value="">
                 </div>
             </div>
             <div class="col-md">
                 <div class="form-group">
                     <label for="surname" class="font-weight-bold">สกุล</label>
-                    <input type="text" class="form-control" id="surname" name="surname" value="อิศระ">
+                    <input type="text" class="form-control" id="surname" name="surname" value="">
                 </div>
             </div>
             <div class="col-md">
@@ -42,7 +41,7 @@
             <div class="col-md">
                 <div class="form-group">
                     <label for="hn" class="font-weight-bold">HN</label>
-                    <input type="text" class="form-control" id="hn" name="hn" value="51-5149">
+                    <input type="text" class="form-control" id="hn" name="hn" value="">
                 </div>
             </div>
         </div>
