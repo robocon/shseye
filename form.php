@@ -1,8 +1,3 @@
-<?php 
-
-
-
-?>
 <link rel="stylesheet" href="bootstrap-datepicker-master/dist/css/bootstrap-datepicker3.min.css">
 <script src="bootstrap-datepicker-master/dist/js/bootstrap-datepicker.min.js"></script>
 <script src="bootstrap-datepicker-master/dist/locales/bootstrap-datepicker.th.min.js"></script>
@@ -17,7 +12,7 @@
 
 <?php 
 
-$part = input('part');
+$part = $_REQUEST('part');
 if (empty($part)) {
     ?>
     <div class="row">
@@ -26,11 +21,7 @@ if (empty($part)) {
                 <div class="form-row align-items-center">
                     <div class="col-auto">
                         <input type="text" class="form-control mb-2" placeholder="ใส่เลขบัตรประชาชน" name="idcard" required>
-                        <div class="invalid-feedback">
-                            Please provide a valid city.
-                        </div>
                     </div>
-                   
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
                         <input type="hidden" name="part" value="searchIdcard">

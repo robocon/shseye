@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50713
-Source Host           : 127.0.0.1:3306
+Source Server         : LocalPort80
+Source Server Version : 50560
+Source Host           : localhost:3306
 Source Database       : shseye
 
 Target Server Type    : MYSQL
-Target Server Version : 50713
+Target Server Version : 50560
 File Encoding         : 65001
 
-Date: 2020-07-19 10:49:59
+Date: 2020-07-19 14:48:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `iop` (
   `left` varchar(255) DEFAULT NULL,
   `right` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for patients
@@ -48,7 +48,7 @@ CREATE TABLE `patients` (
   `family` varchar(255) DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for treatment
@@ -68,4 +68,4 @@ CREATE TABLE `treatment` (
   `octImg` varchar(255) DEFAULT NULL,
   `status` tinyint(4) DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
