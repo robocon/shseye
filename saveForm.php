@@ -50,6 +50,10 @@ if( $_FILES['oct_img']['error'] === 0 ){
     }
 }
 
+/**
+ * @todo
+ * [] เช็กสถานะตอน edit form
+ */
 $sql = "SELECT * FROM `patients` WHERE `idcard` = '$idcard' ";
 $db->select($sql);
 if($db->get_rows() === 0){
@@ -72,27 +76,56 @@ $drugGlaucoma = json_encode($_POST['drugGlaucoma']);
 $retinalDate = input_post('retinal_date');
 $ctvfDate = input_post('ctvf_date');
 $octDate = input_post('oct_date');
-$sql = "INSERT INTO `treatment` (
-    `id`, `patientId`, `dateTreatment`, `diag`, `drugGlaucoma`, `retinalDate`, 
-    `retinalImg`, `ctvfDate`, `ctvfImg`, `octDate`, `octImg`, `status`
-) VALUES (
-    NULL, '$patientId', '$date', '$diag', '$drugGlaucoma', '$retinalDate', 
-    '$retinalImg', '$ctvfDate', '$ctvfImg', '$octDate', '$octImg', '1' 
-);";
-$db->insert($sql);
-$treatmentId = $db->get_last_id();
+$treatmentId = input_post('treatmentId');
+
+if ($treatmentId===false) {
+    
+    $sql = "INSERT INTO `treatment` (
+        `id`, `patientId`, `dateTreatment`, `diag`, `drugGlaucoma`, `retinalDate`, 
+        `retinalImg`, `ctvfDate`, `ctvfImg`, `octDate`, `octImg`, `status`
+    ) VALUES (
+        NULL, '$patientId', '$date', '$diag', '$drugGlaucoma', '$retinalDate', 
+        '$retinalImg', '$ctvfDate', '$ctvfImg', '$octDate', '$octImg', '1' 
+    );";
+    $db->insert($sql);
+    $treatmentId = $db->get_last_id();
+
+}else{
+
+    if (!empty($retinalImg)) {
+        $sql = "UPDATE `treatment` SET `retinalImg`='$retinalImg' WHERE (`id`='$treatmentId');";
+        $db->update($sql);
+    }
+
+    if (!empty($ctvfImg)) {
+        $sql = "UPDATE `treatment` SET `ctvfImg`='$ctvfImg' WHERE (`id`='$treatmentId');";
+        $db->update($sql);
+    }
+
+    if (!empty($octImg)) {
+        $sql = "UPDATE `treatment` SET `octImg`='$octImg' WHERE (`id`='$treatmentId');";
+        $db->update($sql);
+    }
+}
 
 
 $iopDate = input_post('iop_date');
 $left = input_post('iop_left');
 $right = input_post('iop_right');
+$opdId = input_post('opdId');
+if ($opdId===false) {
+    $sql = "INSERT INTO `iop` ( 
+        `id`, `date`, `iopDate`, `patientId`, `treatmentId`, `left`, `right` 
+    ) VALUES ( 
+        NULL, '$date', '$iopDate', '$patientId', '$treatmentId', '$left', '$right' 
+    );";
+    $db->insert($sql);
+}
+$msg = 'บันทึกข้อมูลเรียบร้อย';
+/**
+ * @todo
+ * [] before redirect CHECK SAVE STATUS!!!! in each state
+ */
 
-$sql = "INSERT INTO `iop` ( 
-    `id`, `date`, `iopDate`, `patientId`, `treatmentId`, `left`, `right` 
-) VALUES ( 
-    NULL, '$date', '$iopDate', '$patientId', '$treatmentId', '$left', '$right' 
-);";
-$db->insert($sql);
-
-redirect('index.php?page=patients', 'บันทึกข้อมูลเรียบร้อย');
+redirect('index.php?page=patients', $msg);
 exit;

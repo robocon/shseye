@@ -34,6 +34,7 @@
 					<a class="nav-link" href="index.php?page=form">ฟอร์มบันทึก</a>
 				</li>
 			</ul>
+			<span class="navbar-text"><a href="javascript:void(0);" class="nav-link" onclick="alert('เข้าสู่ระบบ');">เข้าสู่ระบบ</a></span>
 		</div>
 	</div>
 </nav>

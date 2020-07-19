@@ -61,12 +61,20 @@ if (empty($part)) {
 
         $db->select("SELECT * FROM `iop` WHERE `treatmentId` = '$tmId' ");
         $iop = $db->get_item();
+        $iopId = $iop['id'];
 
         $status = 'edit';
     }
 
+    
+                $jsAlert = '';
+                if ($status==='edit') {
+                    $jsAlert = 'onsubmit="alert(\'อยู่ในระหว่างการพัฒนาโปรแกรม ใจเย็นๆ\'); return false; "';
+                }
+                
+
     ?>
-    <form action="index.php" method="post">
+    <form action="index.php" method="post" <?=$jsAlert;?>>
         <fieldset class="border p-2">
             <legend  class="w-auto">ข้อมูลทั่วไป</legend>
             <div class="row">
@@ -378,6 +386,9 @@ if (empty($part)) {
                 <button type="submit" class="btn btn-primary btn-lg btn-block" formenctype="multipart/form-data">บันทึกข้อมูล</button>
                 <input type="hidden" name="action" value="save">
                 <input type="hidden" name="status" value="<?=$status;?>">
+                <input type="hidden" name="userId" value="<?=$userId;?>">
+                <input type="hidden" name="treatmentId" value="<?=$treatmentId;?>">
+                <input type="hidden" name="opdId" value="<?=$iopId;?>">
             </div>
         </div>
         <div class="row"><div class="col-md">&nbsp;</div></div>
