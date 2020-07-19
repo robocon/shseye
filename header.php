@@ -28,7 +28,7 @@
 					<a class="nav-link" href="index.php">หน้าหลัก</a>
 				</li>
 				<li class="nav-item active">
-					<a class="nav-link" href="index.php?page=patient">รายการ</a>
+					<a class="nav-link" href="index.php?page=patients">รายการ</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="index.php?page=form">ฟอร์มบันทึก</a>
