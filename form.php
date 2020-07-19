@@ -22,11 +22,15 @@ if (empty($part)) {
     ?>
     <div class="row">
         <div class="col-md">
-            <form action="index.php?page=form" method="post">
+            <form action="index.php?page=form" method="post" >
                 <div class="form-row align-items-center">
                     <div class="col-auto">
-                        <input type="text" class="form-control mb-2" placeholder="เลขบัตรประชาชน" name="idcard">
+                        <input type="text" class="form-control mb-2" placeholder="ใส่เลขบัตรประชาชน" name="idcard" required>
+                        <div class="invalid-feedback">
+                            Please provide a valid city.
+                        </div>
                     </div>
+                   
                     <div class="col-auto">
                         <button type="submit" class="btn btn-primary mb-2">ค้นหา</button>
                         <input type="hidden" name="part" value="searchIdcard">
@@ -37,13 +41,11 @@ if (empty($part)) {
     </div>
     <?php 
 }elseif($part==='searchIdcard' || $part === 'edit') {
-
+    $db = Mysql::load();
     $idcard = input('idcard');
     $user = [];
     $status = 'new';
-    if ($part==='edit') {
-        
-        $db = Mysql::load();
+    if ($part==='edit') { 
 
         $id = input_get('id');
         $treatmentId = input_get('treatment');
@@ -203,17 +205,28 @@ if (empty($part)) {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="retinal_img">เลือกรูป</label>
+                    <label for="retinal_img">แนบไฟล์</label>
+                    <input type="file" class="form-control-file" name="retinal_img" id="retinal_img" accept="application/pdf">
                     <?php 
-                    $src = '';
                     if (!empty($tm['retinalImg'])) {
                         $src = 'uploads/'.$user['idcard'].'/'.$tm['retinalImg'];
+                        ?>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#retinalModel">ดูไฟล์</button>
+                        <div class="modal fade" id="retinalModel" tabindex="-1" role="dialog" aria-labelledby="retinalModelLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                <div class="modal-body">
+                                <object data="<?=$src;?>" type="application/pdf" width="100%" height="500px;"></object>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
                     }
                     ?>
-                    <input type="file" class="form-control-file" name="retinal_img" id="retinal_img" accept="image/*" onchange="loadFile(event,'retinalExample')">
-                    <div>
-                        <img id="retinalExample" class="img-fluid img-thumbnail" style="max-width: 300px; max-height: 300px;" src="<?=$src;?>">
-                    </div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -224,17 +237,29 @@ if (empty($part)) {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="ctvf_img">เลือกรูป</label>
+                    <label for="ctvf_img">แนบไฟล์</label>
+                    <input type="file" class="form-control-file" name="ctvf_img" id="ctvf_img" accept="application/pdf">
                     <?php 
                     $src = '';
                     if (!empty($tm['ctvfImg'])) {
                         $src = 'uploads/'.$user['idcard'].'/'.$tm['ctvfImg'];
+                        ?>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ctvfModel">ดูไฟล์</button>
+                        <div class="modal fade" id="ctvfModel" tabindex="-1" role="dialog" aria-labelledby="ctvfModelLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                <div class="modal-body">
+                                <object data="<?=$src;?>" type="application/pdf" width="100%" height="500px;"></object>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
                     }
                     ?>
-                    <input type="file" class="form-control-file" name="ctvf_img" id="ctvf_img" accept="image/*" onchange="loadFile(event,'ctvfExample')">
-                    <div>
-                        <img id="ctvfExample" class="img-fluid img-thumbnail" style="max-width: 300px; max-height: 300px;" src="<?=$src;?>">
-                    </div>
                 </div>
             </div>
             <div class="col-md-3">
@@ -245,17 +270,30 @@ if (empty($part)) {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="oct_img">เลือกรูป</label>
+                    <label for="oct_img">แนบไฟล์</label>
+                    <input type="file" class="form-control-file" name="oct_img" id="oct_img" accept="application/pdf" onchange="loadFile(event,'octExample')">
                     <?php 
                     $src = '';
                     if (!empty($tm['octImg'])) {
                         $src = 'uploads/'.$user['idcard'].'/'.$tm['octImg'];
+                        ?>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#octModel">ดูไฟล์</button>
+                        <div class="modal fade" id="octModel" tabindex="-1" role="dialog" aria-labelledby="octModelLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                <div class="modal-body">
+                                <object data="<?=$src;?>" type="application/pdf" width="100%" height="500px;"></object>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ปิด</button>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
                     }
                     ?>
-                    <input type="file" class="form-control-file" name="oct_img" id="oct_img" accept="image/*" onchange="loadFile(event,'octExample')">
-                    <div>
-                        <img id="octExample" class="img-fluid img-thumbnail" style="max-width: 300px; max-height: 300px;" src="<?=$src;?>">
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -280,52 +318,59 @@ if (empty($part)) {
                 </div>
                 <?php 
                 $sql = "SELECT * FROM `iop` WHERE `patientId` = '$userId' ORDER BY `iopDate` ASC LIMIT 5";
-                $iopItems = $db->get_items($sql);
-                dump($sql);
-                dump($iopItems);
-                $iopDateList = [];
-                $iopLeftList = [];
-                $iopRightList = [];
-                foreach ($iopItems as $key => $iopItem) {
-                    $iopDateList[] = $iopItem['iopDate'];
-                    $iopLeftList[] = $iopItem['left'];
-                    $iopRightList[] = $iopItem['right'];
-                }
+                $db->select($sql);
+                if ($db->get_rows() > 0) {
+                    $iopItems = $db->get_items($sql);
+                    $iopDateList = [];
+                    $iopLeftList = [];
+                    $iopRightList = [];
+                    foreach ($iopItems as $key => $iopItem) {
+                        $iopDateList[] = $iopItem['iopDate'];
+                        $iopLeftList[] = $iopItem['left'];
+                        $iopRightList[] = $iopItem['right'];
+                    }
 
-                dump($iopDateList);
+                    ?>
+                    <table class="table">
+                        <tr>
+                            <th>วันที่</th>
+                            <?php 
+                            foreach ($iopDateList as $key => $itemDate) {
+                                ?>
+                                <th><?=$itemDate;?></th>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <th>ขวา</th>
+                            <?php 
+                            foreach ($iopRightList as $key => $eyeRight) {
+                                ?>
+                                <td><?=$eyeRight;?></td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                        <tr>
+                            <th>ซ้าย</th>
+                            <?php 
+                            foreach ($iopLeftList as $key => $eyeLeft) {
+                                ?>
+                                <td><?=$eyeLeft;?></td>
+                                <?php
+                            }
+                            ?>
+                        </tr>
+                    </table>
+                    <?php
+                }else{
+                    ?><p>ไม่มีข้อมูล</p><?php
+                }
+                
                 ?>
-                <table class="table">
-                    <tr>
-                        <th>วันที่</th>
-                        <?php 
-                        foreach ($iopDateList as $key => $itemDate) {
-                            ?>
-                            <th><?=$itemDate;?></th>
-                            <?php
-                        }
-                        ?>
-                    </tr>
-                    <tr>
-                        <th>ขวา</th>
-                        <?php 
-                        foreach ($iopRightList as $key => $eyeRight) {
-                            ?>
-                            <td><?=$eyeRight;?></td>
-                            <?php
-                        }
-                        ?>
-                    </tr>
-                    <tr>
-                        <th>ซ้าย</th>
-                        <?php 
-                        foreach ($iopLeftList as $key => $eyeLeft) {
-                            ?>
-                            <td><?=$eyeLeft;?></td>
-                            <?php
-                        }
-                        ?>
-                    </tr>
-                </table>
+                
+
             </div>
         </div>
         <div class="row">
@@ -337,16 +382,8 @@ if (empty($part)) {
         </div>
         <div class="row"><div class="col-md">&nbsp;</div></div>
     </form>
-
+            
     <script>
-        // Upload Preview Image
-        var loadFile = function(event,divId) {
-            var output = document.getElementById(divId);
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function() {
-                URL.revokeObjectURL(output.src) // free memory
-            }
-        };
 
         $('#retinal_date').datepicker({
             format: "yyyy-mm-dd",
