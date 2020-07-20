@@ -11,8 +11,7 @@
 </div>
 
 <?php 
-
-$part = $_REQUEST('part');
+$part = $_REQUEST['part'];
 if (empty($part)) {
     ?>
     <div class="row">
@@ -34,7 +33,7 @@ if (empty($part)) {
 }elseif($part==='searchIdcard' || $part === 'edit') {
     $db = Mysql::load();
     $idcard = input('idcard');
-    $user = [];
+    $user = array();
     $status = 'new';
     if ($part==='edit') { 
 
@@ -58,10 +57,10 @@ if (empty($part)) {
     }
 
     
-                $jsAlert = '';
-                if ($status==='edit') {
-                    $jsAlert = 'onsubmit="alert(\'อยู่ในระหว่างการพัฒนาโปรแกรม ใจเย็นๆ\'); return false; "';
-                }
+    $jsAlert = '';
+    if ($status==='edit') {
+        $jsAlert = 'onsubmit="alert(\'อยู่ในระหว่างการพัฒนาโปรแกรม ใจเย็นๆ\'); return false; "';
+    }
                 
 
     ?>
@@ -111,7 +110,7 @@ if (empty($part)) {
                     <div class="form-group">
                         <label class="font-weight-bold">โรคประจำตัว</label>
                         <?php 
-                        $congenitalList = ['Osteoporosis','HT','DM','DLS','ESRD','GOUT'];
+                        $congenitalList = array('Osteoporosis','HT','DM','DLS','ESRD','GOUT');
                         $coni = 1;
                         foreach ($congenitalList as $key => $conItem) {
                             $checked = ( in_array($conItem, json_decode($user['congenital'])) ) ? 'checked="checked"' : '' ;
@@ -159,7 +158,7 @@ if (empty($part)) {
                 <div class="form-group">
                     <label class="font-weight-bold">วินิจฉัยโรค</label>
                     <?php 
-                    $diagList = ['POAG','PACG','APAC','Angle','Recess','Glaucoma'];
+                    $diagList = Array('POAG','PACG','APAC','Angle','Recess','Glaucoma');
                     $coni = 1;
                     foreach ($diagList as $key => $diagItem) {
                         $checked = ( in_array($diagItem, json_decode($tm['diag'])) ) ? 'checked="checked"' : '' ;
@@ -179,7 +178,7 @@ if (empty($part)) {
                     <label class="font-weight-bold">ยาโรคต้อหิน</label>
 
                     <?php 
-                    $drugList = ['Alphagan','Cosopt','Travatan','Taflotan','Lanotan'];
+                    $drugList = Array('Alphagan','Cosopt','Travatan','Taflotan','Lanotan');
                     $coni = 1;
                     foreach ($drugList as $key => $drugItem) {
                         $checked = ( in_array($drugItem, json_decode($tm['drugGlaucoma'])) ) ? 'checked="checked"' : '' ;
@@ -320,9 +319,9 @@ if (empty($part)) {
                 $db->select($sql);
                 if ($db->get_rows() > 0) {
                     $iopItems = $db->get_items($sql);
-                    $iopDateList = [];
-                    $iopLeftList = [];
-                    $iopRightList = [];
+                    $iopDateList = Array();
+                    $iopLeftList = Array();
+                    $iopRightList = Array();
                     foreach ($iopItems as $key => $iopItem) {
                         $iopDateList[] = $iopItem['iopDate'];
                         $iopLeftList[] = $iopItem['left'];
