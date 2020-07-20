@@ -64,38 +64,38 @@ if (empty($part)) {
                 
 
     ?>
-    <form action="index.php" method="post" <?=$jsAlert;?>>
+    <form action="index.php" method="post" <?=$jsAlert;?> formenctype="multipart/form-data">
         <fieldset class="border p-2">
             <legend  class="w-auto">ข้อมูลทั่วไป</legend>
             <div class="row">
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="yot" class="font-weight-bold">ยศ/คำนำหน้าชื่อ</label>
-                        <input type="text" class="form-control" id="yot" name="yot" value="<?=$user['yot'];?>">
+                        <input type="text" class="form-control" id="yot" name="yot" value="<?=$user['yot'];?>" required="required">
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-group">
                         <label for="name" class="font-weight-bold">ชื่อ</label>
-                        <input type="text" class="form-control" id="name" name="name" value="<?=$user['name'];?>">
+                        <input type="text" class="form-control" id="name" name="name" value="<?=$user['name'];?>" required="required">
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-group">
                         <label for="surname" class="font-weight-bold">สกุล</label>
-                        <input type="text" class="form-control" id="surname" name="surname" value="<?=$user['surname'];?>">
+                        <input type="text" class="form-control" id="surname" name="surname" value="<?=$user['surname'];?>" required="required">
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-group">
                         <label for="idcard" class="font-weight-bold">เลขที่บัตรประชาชน</label>
-                        <input type="text" class="form-control" id="idcard" name="idcard" value="<?=$idcard;?>">
+                        <input type="text" class="form-control" id="idcard" name="idcard" value="<?=$idcard;?>" required="required">
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="form-group">
                         <label for="hn" class="font-weight-bold">HN</label>
-                        <input type="text" class="form-control" id="hn" name="hn" value="<?=$user['hn'];?>">
+                        <input type="text" class="form-control" id="hn" name="hn" value="<?=$user['hn'];?>" required="required">
                     </div>
                 </div>
             </div>
@@ -103,7 +103,7 @@ if (empty($part)) {
                 <div class="col-md-2">
                     <div class="form-group">
                         <label class="font-weight-bold">อายุ</label>
-                        <input type="text" class="form-control" id="age" name="age" value="<?=$user['age'];?>">
+                        <input type="text" class="form-control" id="age" name="age" value="<?=$user['age'];?>" required="required">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -373,7 +373,7 @@ if (empty($part)) {
         </div>
         <div class="row">
             <div class="col-md">
-                <button type="submit" class="btn btn-primary btn-lg btn-block" formenctype="multipart/form-data">บันทึกข้อมูล</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" >บันทึกข้อมูล</button>
                 <input type="hidden" name="action" value="save">
                 <input type="hidden" name="status" value="<?=$status;?>">
                 <input type="hidden" name="userId" value="<?=$userId;?>">
