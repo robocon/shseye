@@ -35,6 +35,10 @@ if (empty($part)) {
     $idcard = input('idcard');
     $user = array();
     $status = 'new';
+
+    $db->select("SELECT * FROM `patients` WHERE `idcard` = '$idcard'");
+    $user = $db->get_item();
+
     if ($part==='edit') { 
 
         $id = input_get('id');
@@ -55,7 +59,6 @@ if (empty($part)) {
 
         $status = 'edit';
     }
-
     
     $jsAlert = '';
     if ($status==='edit') {
@@ -64,7 +67,7 @@ if (empty($part)) {
                 
 
     ?>
-    <form action="index.php" method="post" <?=$jsAlert;?> formenctype="multipart/form-data">
+    <form action="index.php" method="post" <?=$jsAlert;?> enctype="multipart/form-data">
         <fieldset class="border p-2">
             <legend  class="w-auto">ข้อมูลทั่วไป</legend>
             <div class="row">
@@ -125,28 +128,36 @@ if (empty($part)) {
                         ?>
                     </div>
                 </div>
+                <?php 
+                $myopia1 = ( $user['myopia']==1 ) ? 'checked="checked"' : '' ;
+                $myopia0 = ( $user['myopia']==0 ) ? 'checked="checked"' : '' ;
+                ?>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="font-weight-bold">สายตาสั้นเกิน 4.00D</label>
                         <div class="custom-control custom-radio">
-                            <input class="custom-control-input" type="radio" name="myopia" id="myopia1" value="1">
+                            <input class="custom-control-input" type="radio" name="myopia" id="myopia1" value="1" <?=$myopia1;?>>
                             <label class="custom-control-label" for="myopia1">ใช่</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input class="custom-control-input" type="radio" name="myopia" id="myopia2" value="0">
+                            <input class="custom-control-input" type="radio" name="myopia" id="myopia2" value="0" <?=$myopia1;?>>
                             <label class="custom-control-label" for="myopia2">ไม่ใช่</label>
                         </div>
                     </div>
                 </div>
+                <?php 
+                $family1 = ( $user['family']==1 ) ? 'checked="checked"' : '' ;
+                $family0 = ( $user['family']==0 ) ? 'checked="checked"' : '' ;
+                ?>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="font-weight-bold">ประวัติครอบครัวมีโรคต้อหิน</label>
                         <div class="custom-control custom-radio">
-                            <input class="custom-control-input" type="radio" name="family" id="family1" value="1">
+                            <input class="custom-control-input" type="radio" name="family" id="family1" value="1" <?=$family1;?>>
                             <label class="custom-control-label" for="family1">ใช่</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input class="custom-control-input" type="radio" name="family" id="family2" value="0">
+                            <input class="custom-control-input" type="radio" name="family" id="family2" value="0" <?=$family0;?>>
                             <label class="custom-control-label" for="family2">ไม่ใช่</label>
                         </div>
                     </div>
@@ -315,7 +326,7 @@ if (empty($part)) {
                     <label for="retinal_date" class="font-weight-bold">ความดันลูกตา</label>
                 </div>
                 <?php 
-                $sql = "SELECT * FROM `iop` WHERE `patientId` = '$userId' ORDER BY `iopDate` ASC LIMIT 5";
+                $sql = "SELECT * FROM `iop` WHERE `patientId` = '$userId' ORDER BY `iopDate` DESC LIMIT 5";
                 $db->select($sql);
                 if ($db->get_rows() > 0) {
                     $iopItems = $db->get_items($sql);

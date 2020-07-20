@@ -73,10 +73,23 @@ if($db->get_rows() === 0){
 
 $diag = json_encode($_POST['diag']);
 $drugGlaucoma = json_encode($_POST['drugGlaucoma']);
-$retinalDate = input_post('retinal_date');
-$ctvfDate = input_post('ctvf_date');
-$octDate = input_post('oct_date');
+$retinalDate = input_post('retinal_date',NULL);
+$ctvfDate = input_post('ctvf_date',NULL);
+$octDate = input_post('oct_date',NULL);
+
+$retinalDate = (empty($retinalDate)) ? NULL : $retinalDate ;
+$ctvfDate = (empty($ctvfDate)) ? NULL : $ctvfDate ;
+$octDate = (empty($octDate)) ? NULL : $octDate ;
+
 $treatmentId = input_post('treatmentId');
+
+$sql = "INSERT INTO `treatment` (
+    `id`, `patientId`, `dateTreatment`, `diag`, `drugGlaucoma`, `retinalDate`, 
+    `retinalImg`, `ctvfDate`, `ctvfImg`, `octDate`, `octImg`, `status`
+) VALUES (
+    NULL, '$patientId', '$date', '$diag', '$drugGlaucoma', '$retinalDate', 
+    '$retinalImg', '$ctvfDate', '$ctvfImg', '$octDate', '$octImg', '1' 
+);";
 
 if ($treatmentId===false) {
     
@@ -84,10 +97,24 @@ if ($treatmentId===false) {
         `id`, `patientId`, `dateTreatment`, `diag`, `drugGlaucoma`, `retinalDate`, 
         `retinalImg`, `ctvfDate`, `ctvfImg`, `octDate`, `octImg`, `status`
     ) VALUES (
-        NULL, '$patientId', '$date', '$diag', '$drugGlaucoma', '$retinalDate', 
-        '$retinalImg', '$ctvfDate', '$ctvfImg', '$octDate', '$octImg', '1' 
+        NULL, :patientId, :dateTreatment, :diag, :drugGlaucoma, :retinalDate, 
+        :retinalImg, :ctvfDate, :ctvfImg, :octDate, :octImg, '1' 
     );";
-    $db->insert($sql);
+
+    $data = array(
+        ':patientId' => $patientId,
+        ':dateTreatment' => $date,
+        ':diag' => $diag,
+        ':drugGlaucoma' => $drugGlaucoma,
+        ':retinalDate' => $retinalDate,
+        ':retinalImg' => $retinalImg,
+        ':ctvfDate' => $ctvfDate,
+        ':ctvfImg' => $ctvfImg,
+        ':octDate' => $octDate,
+        ':octImg' => $octImg,
+    );
+
+    $res = $db->insert($sql,$data);
     $treatmentId = $db->get_last_id();
 
 }else{
@@ -107,7 +134,6 @@ if ($treatmentId===false) {
         $db->update($sql);
     }
 }
-
 
 $iopDate = input_post('iop_date');
 $left = input_post('iop_left');
