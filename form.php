@@ -140,7 +140,7 @@ if (empty($part)) {
                             <label class="custom-control-label" for="myopia1">ใช่</label>
                         </div>
                         <div class="custom-control custom-radio">
-                            <input class="custom-control-input" type="radio" name="myopia" id="myopia2" value="0" <?=$myopia1;?>>
+                            <input class="custom-control-input" type="radio" name="myopia" id="myopia2" value="0" <?=$myopia0;?>>
                             <label class="custom-control-label" for="myopia2">ไม่ใช่</label>
                         </div>
                     </div>
